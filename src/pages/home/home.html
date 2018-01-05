@@ -1,14 +1,25 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      首页
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <title-bar class='data-margin' [title]="'当日交易数据'"></title-bar>
+  <little-item [title]="'2017年10月18日数据'"></little-item>
+  <div class='item-wrapper data-margin'>
+    <block-item class='item basic-bg' [img]="'assets/imgs/bishu.png'" [title]='"笔数"' [value]="'15672(亿元)'"></block-item>
+    <block-item class='item basic-bg' [img]="'assets/imgs/jine.png'" [title]='"金额"' [value]="'15672(亿元)'"></block-item>
+    <block-item class='item basic-bg' [img]="'assets/imgs/shouru.png'" [title]='"收入"' [value]="'15672(亿元)'"></block-item>
+  </div>
+  <little-item [title]="'当日交易数据与近15天比较'"></little-item>
+  <div class='item-wrapper data-margin'>
+    <block-item-state class='item basic-bg' [img]="'assets/imgs/bishu.png'" [title]='"笔数"' [value]="'67%'"></block-item-state>
+    <block-item-state class='item basic-bg' [img]="'assets/imgs/jine.png'" [title]='"金额"' [up]='false' [value]="'-23%'"></block-item-state>
+    <block-item-state class='item basic-bg' [img]="'assets/imgs/shouru.png'" [title]='"收入"' [up]='false' [value]="'-32%'"></block-item-state>
+  </div>
+  <title-bar class='data-margin' [title]="'近七天交易数据'"></title-bar>
+  <table-data class='basic-bg'></table-data>
 </ion-content>

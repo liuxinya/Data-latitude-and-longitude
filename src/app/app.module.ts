@@ -6,20 +6,33 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { CardIssuersPage } from '../pages/card-issuers/card-issuers';
+import { ComponentsModule } from '../components/components.module';
+import { BlockItemComponent } from '../containers/block-item.component';
+import { BlockItemStateComponent } from '../containers/block-item-state.component';
+import { TableDataComponent } from '../containers/table-data.component';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    CardIssuersPage,
+    BlockItemComponent,
+    BlockItemStateComponent,
+    TableDataComponent
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    CardIssuersPage,
+    BlockItemStateComponent,
+    TableDataComponent
   ],
   providers: [
     StatusBar,

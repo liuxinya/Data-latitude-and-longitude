@@ -1,4 +1,6 @@
-export class BasicComponent {
+import { OnInit, OnDestroy } from "@angular/core";
+
+export class BasicComponent implements OnInit, OnDestroy{
     constructor() {
         try {
             this.beforeStart()
@@ -30,7 +32,7 @@ export class BasicComponent {
 
     }
     // 组件初始化的时候
-    private async ngOnInit() {
+    async ngOnInit() {
         try {
             await this.beforeInit();
             await this.onInit();
@@ -51,7 +53,7 @@ export class BasicComponent {
 
     }
     // 组件销毁时
-    private async ngOnDestroy() {
+    async ngOnDestroy() {
         await this.beforeDestroy();
         await this.onDestroy();
         await this.afterDestroy();
