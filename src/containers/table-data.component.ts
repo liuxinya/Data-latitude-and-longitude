@@ -19,7 +19,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
                 <div class='item'>
                     {{ content ? content.date : ''}}
                 </div>
-                <div *ngFor="let header of headers">
+                <div class='item' *ngFor="let header of headers">
                     {{(content && header) ? content[header.key] : ''}}
                 </div>
             </div>
@@ -30,9 +30,41 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
         :host {
             display: block;
         }
+        .header {
+            font-weight: 600;
+        }
+        .header .item {
+            display: flex: 
+        }
         .line {
             display: flex;
+            height: 28px;
         }
+        .line .item {
+            flex: 3;
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content.line .item:nth-child(2) {
+            color: #3C7FD9;
+        }
+        .content.line .item:nth-child(3) {
+            color: #E64B76;
+        }
+        .content.line .item:nth-child(4) {
+            color: #39BDAE;
+        }
+        .line .item img {
+            max-width: 14px;
+            max-height: 14px;
+            margin-right: 6px;
+        }
+        .line .item:first-child {
+            flex: 2;
+        }
+        .content .item:
         `
     ],
     encapsulation: ViewEncapsulation.Emulated
