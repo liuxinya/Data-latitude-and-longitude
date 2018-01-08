@@ -2,8 +2,9 @@ import { Component, Input } from '@angular/core';
 @Component({
     selector: 'little-item',
     template: `
-        <div class='title basic-bg'>
+        <div class='title' [ngClass]='{"basic-bg": useBg}'>
             {{title}}
+            <ng-content></ng-content>
         </div>
     `,
     styles: [
@@ -21,4 +22,6 @@ import { Component, Input } from '@angular/core';
 })
 export class LittleItemComponent {
     @Input() title: string = '';
+    // 是否使用背景 默认使用
+    @Input('use-bg') useBg: boolean = true;
 }

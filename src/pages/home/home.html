@@ -7,12 +7,13 @@
 </ion-header>
 
 <ion-content padding>
+  <basic-choose (on-change)='basicChooseHandler($event)' class='data-margin'></basic-choose>
   <title-bar class='data-margin' [title]="'当日交易数据'"></title-bar>
   <little-item [title]="'2017年10月18日数据'"></little-item>
   <div class='item-wrapper data-margin'>
-    <block-item class='item basic-bg' [img]="'assets/imgs/bishu.png'" [title]='"笔数"' [value]="'15672(亿元)'"></block-item>
-    <block-item class='item basic-bg' [img]="'assets/imgs/jine.png'" [title]='"金额"' [value]="'15672(亿元)'"></block-item>
-    <block-item class='item basic-bg' [img]="'assets/imgs/shouru.png'" [title]='"收入"' [value]="'15672(亿元)'"></block-item>
+    <block-item class='item basic-bg' [img]="'assets/imgs/bishu.png'" [title]='"笔数"' [value]="todayData.count | money: '笔'"></block-item>
+    <block-item class='item basic-bg' [img]="'assets/imgs/jine.png'" [title]='"金额"' [value]="todayData.amount | money: '元'"></block-item>
+    <block-item class='item basic-bg' [img]="'assets/imgs/shouru.png'" [title]='"收入"' [value]="todayData.income | money: '元'"></block-item>
   </div>
   <little-item [title]="'当日交易数据与近15天比较'"></little-item>
   <div class='item-wrapper data-margin'>
@@ -22,4 +23,5 @@
   </div>
   <title-bar class='data-margin' [title]="'近七天交易数据'"></title-bar>
   <table-data class='basic-bg'></table-data>
+  <toggle-expand class='data-margin float-right'></toggle-expand>
 </ion-content>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { TitleBarComponent } from './title-bar.component';
 import { LittleItemComponent } from './little-item.component';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -8,7 +9,7 @@ import { LittleItemComponent } from './little-item.component';
     LittleItemComponent
   ],
   imports: [
-
+    BrowserModule
   ],
   exports: [
     TitleBarComponent,

@@ -7,6 +7,7 @@ export class BasicComponent implements OnInit, OnDestroy{
             .then(async () => {
                 await this.onStart();
                 await this.afterStart();
+                this.run();
             });
         } catch(e) {
 
@@ -18,6 +19,9 @@ export class BasicComponent implements OnInit, OnDestroy{
     async onStart() {}
     // 初始化后
     async afterStart() {
+
+    }
+    async run() {
 
     }
     // 组件初始化之前

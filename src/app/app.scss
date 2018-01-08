@@ -59,8 +59,14 @@ ion-tabs {
     background: rgba(255,255,255,0.06);
     border-radius: 3px;
 }
+.basic-bg-color {
+    background: rgba(255,255,255,0.06);
+}
 .flex-center {
     display: flex;
     justify-content: center;
     align-content: center;
+}
+.float-right {
+    float: right;
 }
