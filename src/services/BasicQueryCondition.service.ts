@@ -9,6 +9,9 @@ export class BasicQueryConditionService {
     ) {
 
     }
+    getDate() {
+        return this.$baseConditionData.date$.value;
+    }
     parseQuery<T>(query: any = {}):T {
         return Object.assign({
             date: formateDate(this.$baseConditionData.date$.value),

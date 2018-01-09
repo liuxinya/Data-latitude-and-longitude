@@ -1,3 +1,4 @@
+import { EchartsBasicComponent } from './../containers/echarts.component';
 import { PickKeyPipe } from './../pipes/pickKey';
 import { BasicChooseComponent } from './../containers/basic-choose.component';
 import { BasicConditionDataModelSerive } from './../model/BasicConditionData';
@@ -22,6 +23,9 @@ import { HttpModule } from '@angular/http';
 import { MoneyPipe } from '../pipes/money';
 import { HomePageService } from '../services/home/main-page.service';
 import { BasicQueryConditionService } from '../services/BasicQueryCondition.service';
+import { PercentagePipe } from '../pipes/percentage';
+import { RecentDaysDataComponent } from '../modules/recent-days-data';
+import { EchartsDataComponent } from '../containers/echarts.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { BasicQueryConditionService } from '../services/BasicQueryCondition.serv
     ToggleExpandComponent,
     MoneyPipe,
     BasicChooseComponent,
-    PickKeyPipe
+    PickKeyPipe,
+    RecentDaysDataComponent,
+    PercentagePipe,
+    EchartsBasicComponent,
+    EchartsDataComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,10 @@ import { BasicQueryConditionService } from '../services/BasicQueryCondition.serv
     BlockItemStateComponent,
     TableDataComponent,
     ToggleExpandComponent,
-    BasicChooseComponent
+    RecentDaysDataComponent,
+    BasicChooseComponent,
+    EchartsBasicComponent,
+    EchartsDataComponent
   ],
   providers: [
     StatusBar,

@@ -20,7 +20,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
                     {{ content ? content.date : ''}}
                 </div>
                 <div class='item' *ngFor="let header of headers">
-                    {{(content && header) ? content[header.key] : ''}}
+                    {{content[header.key] | money: header.ceil}}
                 </div>
             </div>
         </div>
@@ -77,47 +77,29 @@ export class TableDataComponent {
         {
             img: 'assets/imgs/bishu.png',
             title: '笔数',
-            key: 'count'
+            key: 'count',
+            ceil: '笔'
         },
         {
             img: 'assets/imgs/jine.png',
             title: '金额',
-            key: 'amount'
+            key: 'amount',
+            ceil: '元'
         },
         {
             img: 'assets/imgs/shouru.png',
             title: '收入',
-            key: 'income'
+            key: 'income',
+            ceil: '元'
         }
     ];
-    @Input() contents: TableDataContentObject[] = [
-        {
-            date: '10月28日',
-            count: '1231亿笔',
-            amount: '312亿元',
-            income: '1245亿元'
-        }, {
-            date: '10月29日',
-            count: '1231亿笔',
-            amount: '312亿元',
-            income: '1245亿元'
-        }, {
-            date: '10月30日',
-            count: '1231亿笔',
-            amount: '312亿元',
-            income: '1245亿元'
-        }, {
-            date: '10月31日',
-            count: '1231亿笔',
-            amount: '312亿元',
-            income: '1245亿元'
-        }
-    ];
+    @Input() contents: TableDataContentObject[] = [];
 }
 export interface TableDataHeaderObject {
     img: string; // 图片地址
     title: string; // 显示的标题
     key: string; // 对应的键值
+    ceil: string;
 }
 export interface TableDataContentObject {
     [prop: string]: any;

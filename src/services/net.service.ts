@@ -13,7 +13,7 @@ export class NetService {
         private http: Http,
         private _flag: FlagService
     ) {
-        this.urlPre = this._flag.isDev ? 'http://localhost:3100' : '';
+        this.urlPre = this._flag.isDev ? 'http://172.20.138.132:3100' : '';
     }
     // 前缀  可能是一个自己指定的服务器  也可能是一个前缀
     private urlPre: string;
