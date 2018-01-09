@@ -1,3 +1,4 @@
+import { CircleItemComponent } from './../containers/circle-item.component';
 import { EchartsBasicComponent } from './../containers/echarts.component';
 import { PickKeyPipe } from './../pipes/pickKey';
 import { BasicChooseComponent } from './../containers/basic-choose.component';
@@ -42,7 +43,8 @@ import { EchartsDataComponent } from '../containers/echarts.component';
     RecentDaysDataComponent,
     PercentagePipe,
     EchartsBasicComponent,
-    EchartsDataComponent
+    EchartsDataComponent,
+    CircleItemComponent
   ],
   imports: [
     BrowserModule,

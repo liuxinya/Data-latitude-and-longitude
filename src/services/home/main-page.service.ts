@@ -1,3 +1,5 @@
+import { CategaryObject } from './main-page.service';
+import { BusinessLineResponseObject } from './../../interfaces/home/BusinessLineResponseObject';
 import { BasicQueryConditionObject } from './../../interfaces/BasicQueryConditionObject';
 import { SummaryQueryObject } from './../../interfaces/home/SummaryQueryObject';
 import { Injectable } from '@angular/core';
@@ -10,6 +12,54 @@ import { formateDate, numCompletion } from '../helpers/date.helper';
 import { generateArr } from '../helpers/array.helper';
 import { RecentDaysSummaryObject } from '../../interfaces/home/RecentDaysSummaryObject';
 import { EchartsDataObject, EchartsYDataObject } from '../../containers/echarts.component';
+import { IncreaseAreaResponseObject } from '../../interfaces/home/IncreaseAreaResponseObject';
+import { BasicChartResponseObject } from '../../interfaces/home/BasicChartResponseObject';
+import { ImplementationResponseObject } from '../../interfaces/home/ImplementationResponseObject';
+export interface CategaryObject {
+    title: string;
+    key: string;
+    ceil: string;
+}
+let categaries:  CategaryObject[]= [{
+    title: '笔数',
+    key: 'count',
+    ceil: '笔'
+}, {
+    title: '金额',
+    key: 'amount',
+    ceil: '元'
+}, {
+    title: '收入',
+    key: 'income',
+    ceil: '元'
+}];
+function generateY() {
+    return categaries.map((categary: {
+        title: string,
+        key: string,
+        ceil: string
+    }) => {
+        return {
+            title: categary.title,
+            data: [],
+            key: categary.key,
+            ceil: categary.ceil
+        }
+    })
+}
+function generateChartOptionData(data: BasicChartResponseObject[]) {
+    let obj: EchartsDataObject = {
+        x: [],
+        y: generateY()
+    };
+    data.map((item: IncreaseAreaResponseObject, index: number ) => {
+        obj.x.push(item.name);
+        obj.y.map((_item: EchartsYDataObject, _index: number) => {
+            obj.y[_index].data.push(item.data[_item.key]);
+        })
+    })
+    return obj;
+}
 @Injectable()
 export class HomePageService {
     constructor(
@@ -90,19 +140,6 @@ export class HomePageService {
         let query = this._basicQuery.parseQuery<ComparisonQueryObject>({
             months
         });
-        let categaries = [{
-            title: '笔数',
-            key: 'count',
-            ceil: '笔'
-        }, {
-            title: '金额',
-            key: 'amount',
-            ceil: '元'
-        }, {
-            title: '收入',
-            key: 'income',
-            ceil: '元'
-        }];
         try {
             return await this._net.get(
                 joinUrl(
@@ -124,24 +161,18 @@ export class HomePageService {
                 data.data.increase.push(data.data.nextMonthPrediction);
                 let obj: EchartsDataObject = {
                     x: [],
-                    y: categaries.map((categary: {
-                        title: string,
-                        key: string,
-                        ceil: string
-                    }) => {
-                        return {
-                            title: categary.title,
-                            data: [],
-                            key: categary.key,
-                            ceil: categary.ceil
-                        }
-                    })
+                    y: generateY()
                 };
                 data.data.increase.map((item: {
                     date: number,
                     data: BasicInfoObject
                 }, index: number) => {
-                    obj.x.push(`${numCompletion(new Date(item.date).getMonth() + 1)}`);
+                    if(index === data.data.increase.length - 1) {
+                        obj.x.push(`下月预测`);
+                    } else {
+                        let date: Date = new Date(item.date);
+                        obj.x.push(`${date.getFullYear()}年\n${numCompletion(date.getMonth() + 1)}月`);
+                    }
                     obj.y.map((_item: EchartsYDataObject, _index: number) => {
                         obj.y[_index].data.push(item.data[_item.key]);
                     })
@@ -164,6 +195,61 @@ export class HomePageService {
                     }
                 })
             }
+        }
+    }
+    async getIncreaseAreaData() {
+        let query = this._basicQuery.parseQuery<BasicQueryConditionObject>();
+        try {
+            return await this._net.get(
+                joinUrl(
+                    this.url,
+                    `increase/area`
+                ),
+                query
+            )
+            .then((data: StatusObject<IncreaseAreaResponseObject[]>) => {
+                return generateChartOptionData(data.data);
+            })
+        } catch(e) {
+            return null;
+        }
+    }
+    async getBusinessLineData() {
+        let query = this._basicQuery.parseQuery<BasicQueryConditionObject>();
+        try {
+            return await this._net.get(
+                joinUrl(
+                    this.url,
+                    `increase/business`
+                ),
+                query
+            )
+            .then((data: StatusObject<BusinessLineResponseObject[]>) => {
+                return generateChartOptionData(data.data);
+            })
+        } catch(e) {
+            return null;
+        }
+    }
+    async getImplementationData() {
+        let query = this._basicQuery.parseQuery<BasicQueryConditionObject>();
+        try {
+            return await this._net.get(
+                joinUrl(
+                    this.url,
+                    `increase/implementation`
+                ),
+                query
+            )
+            .then((data: StatusObject<ImplementationResponseObject>) => {
+                // return generateChartOptionData();
+                categaries.map((categary: CategaryObject) => {
+                    data.data[categary.key].categary = categary;
+                })
+                return data.data;
+            })
+        } catch(e) {
+            return null;
         }
     }
 }

@@ -1,3 +1,5 @@
+import { ImplementationResponseObject } from './../../interfaces/home/ImplementationResponseObject';
+import { EchartsDataObject } from './../../containers/echarts.component';
 import { BasicQueryConditionObject } from './../../interfaces/BasicQueryConditionObject';
 import { Component, ViewChild } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -7,7 +9,6 @@ import { BasicInfoObject } from '../../interfaces/BasicInfoObject';
 import { Tabs } from 'ionic-angular/navigation/nav-interfaces';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { RecentDaysSummaryObject } from '../../interfaces/home/RecentDaysSummaryObject';
-import { EchartsDataObject } from '../../containers/echarts.component';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -34,6 +35,9 @@ export class HomePage extends BasicComponent {
   };
   recentDaysData: RecentDaysSummaryObject[] = [];
   increaseData: EchartsDataObject;
+  increaseAreaData: EchartsDataObject;
+  businessLineData: EchartsDataObject;
+  implementationData: ImplementationResponseObject;
   /**
    * 选择框的处理事件  在初始化的时候会默认调一次
    */
@@ -66,6 +70,18 @@ export class HomePage extends BasicComponent {
       this._main.getIncreaseData()
       .then((data: EchartsDataObject) => {
         this.increaseData = data;
+      }),
+      this._main.getIncreaseAreaData()
+      .then((data: EchartsDataObject) => {
+        this.increaseAreaData = data;
+      }),
+      this._main.getBusinessLineData()
+      .then((data: EchartsDataObject) => {
+        this.businessLineData = data;
+      }),
+      this._main.getImplementationData()
+      .then((data: ImplementationResponseObject) => {
+        this.implementationData = data;
       })
     ])
     .then((results: any[]) => {

@@ -13,7 +13,7 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 .toolbar-background {
-    background-color: #0E2039;
+    background-color: #1F2C41;
 }
 
 ion-title {
@@ -27,7 +27,8 @@ ion-content {
     &.content {
         // background-color: ;
         /* Rectangle: */
-        background-image: linear-gradient(-180deg, #0C1E38 0%, #243545 40%, #293F4D 70%, #0D1F39 100%);
+        // background-image: linear-gradient(-180deg, #0C1E38 0%, #243545 40%, #293F4D 70%, #0D1F39 100%);
+        background-color: #101D33;
         color: white;
         &[padding] {
             .scroll-content {
@@ -41,7 +42,7 @@ ion-tabs {
     &.tabs {
         .tabbar {
             &.show-tabbar {
-                background-color: #0E2039;
+                background-color: #263653;
             }
         }
     }
@@ -61,6 +62,9 @@ ion-tabs {
 }
 .basic-bg-color {
     background: rgba(255,255,255,0.06);
+}
+.basic-bg-radius {
+    border-radius: 3px;
 }
 .flex-center {
     display: flex;

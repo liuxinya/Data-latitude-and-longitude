@@ -33,7 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', (req, res, next) => {
   let indexPath = path.join(__dirname, './routes/index.js')
-  helper.require(indexPath)(req, res, next);
+  try {
+    helper.require(indexPath)(req, res, next);
+  } catch(e) {
+    console.log(e);
+    next();
+  }
 });
 
 // catch 404 and forward to error handler

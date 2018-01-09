@@ -2,6 +2,7 @@ import { Component, Input , ElementRef, ViewChild} from '@angular/core';
 import { getMinMax } from '../services/helpers/array.helper';
 import * as echarts from 'echarts';
 import { transformCeil } from '../pipes/money';
+import { percentageTransformer } from '../pipes/percentage';
 export interface EchartsDataObject {
     x: string[]; // x轴
     y: EchartsYDataObject[];
@@ -84,11 +85,15 @@ export class EchartsBasicComponent {
             width: 50px;
         }
         .left-part .title {
-            height: 50px;
+            height: 40px;
             width: 50px;
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: 12px;
+        }
+        .left-part .title:last-child {
+            height: 30px;
         }
         .right-part {
             flex: 1;
@@ -103,7 +108,10 @@ export class EchartsBasicComponent {
             overflow-x: auto;
         }
         .right-part .line {
-            height: 50px;
+            height: 40px;
+        }
+        .right-part .line:last-child {
+            height: 30px;
         }
         `
     ]
@@ -138,8 +146,9 @@ export class EchartsDataComponent {
             return item.max;
         }).max;
         this._data = data;
-        this.steps = (this.max - this.min) * 1;
+        this.steps = (this.max - this.min) * 1.2;
     };
+    @Input('use-percent') usePercent: boolean = false;
     get data() {
         return this._data;
     }
@@ -154,8 +163,8 @@ export class EchartsDataComponent {
                 show: false,
             },
             grid: {
-                left: 20,
-                right: 20,
+                left: 30,
+                right: 30,
                 top: 'middle',
                 containLabel: false
             },
@@ -165,14 +174,18 @@ export class EchartsDataComponent {
             xAxis: {
                 type: 'category',
                 show: true,
-                offset: -26,
+                offset: -40,
                 boundaryGap: false,
                 data: this.data.x,
                 axisLine: {
                     onZero: false,
+                    show: false,
                     lineStyle: {
                         color: 'white'
                     }
+                },
+                axisTick: {
+                    show: false
                 },
                 axisLabel: {
 
@@ -192,7 +205,7 @@ export class EchartsDataComponent {
         let color = colors[index % colors.length];
         return {
             tooltip: {
-                trigger: 'axis',
+                trigger: 'none',
                 confine: true,
                 formatter: (item: any[]) => {
                     return this.triggerFormat(item[0], line.ceil);
@@ -224,8 +237,8 @@ export class EchartsDataComponent {
                 max: this.max + this.steps
             },
             grid: {
-                left: 20,
-                right: 20,
+                left: 30,
+                right: 30,
                 top: 'middle',
                 containLabel: false
             },
@@ -235,7 +248,8 @@ export class EchartsDataComponent {
                     smooth: true,
                     lineStyle: {
                         normal: {
-                            color: color
+                            color: color,
+                            width: 1
                         }
                     },
                     itemStyle: {
@@ -246,11 +260,14 @@ export class EchartsDataComponent {
                     label: {
                         normal: {
                             show: true,
+                            fontSize: 10,
                             formatter: (item: any) => {
                                 return this.labelFormat(item, line.ceil);
-                            }
+                            },
+                            offset: [0, 2]
                         }
                     },
+                    symbolSize: 2,
                     type:'line',
                     data: line.data
                 }
@@ -258,7 +275,7 @@ export class EchartsDataComponent {
         };
     }
     @Input('label-formate') labelFormat: (e: any, ceil: string) => string = (e: any, ceil: string = '') => {
-        return transformCeil(e.value, ceil);
+        return this.usePercent ?  percentageTransformer(e.value) : transformCeil(e.value, ceil);
     };
     @Input('trigger-formatter') triggerFormat: (e: any, ceil: string) =>  string = (e: any, ceil: string) => {
         return `${e.axisValueLabel}<br\>
@@ -266,7 +283,7 @@ export class EchartsDataComponent {
             <div style="display: inline-block;width: 8px;height:8px;border-radius: 50%;background-color: ${e.color}"></div>
             <span style="color: ${e.color}">${e.seriesName}</span>
             <span>
-                ${transformCeil(e.value, ceil)}
+                ${this.usePercent ? percentageTransformer(e.value) : transformCeil(e.value, ceil)}
             </span>
         </div>
         `;
