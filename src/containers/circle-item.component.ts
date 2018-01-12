@@ -78,12 +78,14 @@ import { CategaryObject } from '../services/home/main-page.service';
             right: 0;
             bottom: 0;
             top: 0;
-            padding: 4px;
+            padding: 14px 4px;
         }
         .content-wrapper .content .instance .data-item {
             text-align: left;
             padding: 2px 0;
             display: flex;
+            height: 22px;
+            line-height: 22px;
             // overflow: hidden;
             // text-overflow: ellipsis;
             // white-space: nowrap;
@@ -122,9 +124,21 @@ export class CircleItemComponent {
 
     }
     ngOnInit() {
-        this.circleOption = generateCircleItemOption(this.data.yearonyear);
+        
     }
-    @Input('data') data: CircleImplementationObject;
+    _data: CircleImplementationObject;
+    @Input('data') set data(data: CircleImplementationObject) {
+        if(data) {
+            this.circleOption = null;
+            setTimeout(() => {
+                this.circleOption =  generateCircleItemOption(data.yearonyear);
+            }, 0);
+        }
+        this._data = data;
+    };
+    get data() {
+        return this._data;
+    }
     circleOption: any;
 }
 export interface CircleImplementationObject {
