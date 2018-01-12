@@ -83,9 +83,10 @@ import { CategaryObject } from '../services/home/main-page.service';
         .content-wrapper .content .instance .data-item {
             text-align: left;
             padding: 2px 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            display: flex;
+            // overflow: hidden;
+            // text-overflow: ellipsis;
+            // white-space: nowrap;
         }
         .content-wrapper .content .instance .data-item img {
             max-width: 16px;
@@ -97,6 +98,9 @@ import { CategaryObject } from '../services/home/main-page.service';
         .content-wrapper .content .instance .data-item .label {
             display: inline-block;
             min-width: 60px;
+        }
+        .content-wrapper .content .instance .data-item .value {
+            flex: 1;
         }
         .content-wrapper .content .instance .data-item .value.good {
             color: #50E3C2;
