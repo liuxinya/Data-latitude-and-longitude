@@ -29,8 +29,8 @@ ion-content {
     &.content {
         // background-color: ;
         /* Rectangle: */
-        // background-image: linear-gradient(-180deg, #0C1E38 0%, #243545 40%, #293F4D 70%, #0D1F39 100%);
-        background-color: #101D33;
+        background-image: linear-gradient(-180deg, #0C1E38 0%, #243545 40%, #293F4D 70%, #0D1F39 100%);
+        // background-color: #101D33;
         color: white;
         &[padding] {
             .scroll-content {
@@ -45,6 +45,19 @@ ion-tabs {
         .tabbar {
             &.show-tabbar {
                 background-color: #263653;
+                a.tab-button[aria-selected=true] {
+                    color: white !important;
+                    ion-icon.tab-button-icon {
+                        color: white !important;
+                    }
+                }
+                a.tab-button [aria-selected=false]{
+                    color: white !important;
+                    opacity: .5;
+                    ion-icon.tab-button-icon {
+                        color: white !important;
+                    }
+                }
             }
         }
     }

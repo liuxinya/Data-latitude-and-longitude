@@ -10,13 +10,19 @@ export class MoneyPipe  implements PipeTransform {
 }
 export function transformCeil(num: number, deci: string = ''): string {
     let str: string = num + '';
-    let base = deci === '元' ? 100 : 1;
-    if(str.length < 6) {
-        return (num / base).toFixed(2) + `${deci}`
-    } else if(str.length < 11){
-        return (num / (10000 * base)).toFixed(2) + `万${deci}`
-    } else  {
-        return (num / (100000000 * base)).toFixed(2) + `亿${deci}`
+    let _d1 = deci[deci.length - 2];
+    let _d2 = deci[deci.length - 1];
+    let _long = +deci[deci.length - 3] || 0;
+    let base = _d2 === '元' ? 100 : 1;
+    let count = 1;
+    switch(_d1) {
+        case '万':
+            count = 10000 * base;
+            break;
+        case '亿':
+            count = 100000000 * base;
+            break;
     }
+    return (num / count).toFixed(_long);
 }
 

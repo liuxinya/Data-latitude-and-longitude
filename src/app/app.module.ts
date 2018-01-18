@@ -1,3 +1,6 @@
+import { ReceiptService } from './../services/receipt/receipt';
+import { ReceiptPage } from './../pages/receipt/receipt';
+import { CardIssuersService } from './../services/card-issuers/card-issuers.service';
 import { CircleItemComponent } from './../containers/circle-item.component';
 import { EchartsBasicComponent } from './../containers/echarts.component';
 import { PickKeyPipe } from './../pipes/pickKey';
@@ -44,7 +47,8 @@ import { EchartsDataComponent } from '../containers/echarts.component';
     PercentagePipe,
     EchartsBasicComponent,
     EchartsDataComponent,
-    CircleItemComponent
+    CircleItemComponent,
+    ReceiptPage
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ import { EchartsDataComponent } from '../containers/echarts.component';
     RecentDaysDataComponent,
     BasicChooseComponent,
     EchartsBasicComponent,
-    EchartsDataComponent
+    EchartsDataComponent,
+    ReceiptPage
   ],
   providers: [
     StatusBar,
@@ -74,6 +79,8 @@ import { EchartsDataComponent } from '../containers/echarts.component';
     ConstantService,
     BasicQueryConditionService,
     BasicConditionDataModelSerive,
+    CardIssuersService,
+    ReceiptService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,3 +1,4 @@
+import { ReceiptService } from './../../services/receipt/receipt';
 import { Component } from '@angular/core';
 import { BasicComponent } from '../../basic.component';
 import { ViewEncapsulation } from '@angular/core';
@@ -6,23 +7,22 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
 import { CardIssuersService } from '../../services/card-issuers/card-issuers.service';
 import { EchartsDataObject } from '../../containers/echarts.component';
 @Component({
-    selector: 'page-card-issuers',
-    templateUrl: './card-issusers.html',
+    selector: 'page-receipt',
+    templateUrl: './receipt.html',
     styles: [
         `
         :host {
             display: block;
             color: white;
-            // background: red;
         }
         `
     ],
     encapsulation: ViewEncapsulation.Emulated
 })
-export class CardIssuersPage extends BasicComponent {
+export class ReceiptPage extends BasicComponent {
     constructor(
         public loadingCtrl: LoadingController,
-        private _main: CardIssuersService,
+        private _main: ReceiptService,
     ) {
         super();
     }
@@ -34,10 +34,10 @@ export class CardIssuersPage extends BasicComponent {
         this.initData();
     }
     async initData() {
-        // let loading = this.loadingCtrl.create({
-        //     content: '数据加载中...'
-        // });
-        // loading.present();
+        let loading = this.loadingCtrl.create({
+            content: '数据加载中...'
+        });
+        loading.present();
         await Promise.all([
             this._main.getIncreaseData()
             .then((data: EchartsDataObject) => {
@@ -52,11 +52,11 @@ export class CardIssuersPage extends BasicComponent {
                 this.recentMonthIncreaseData = data;
             })
           ])
-        //   .then((results: any[]) => {
-        //     loading.dismiss();
-        //   })
-        //   .catch(() => {
-        //     loading.dismiss();
-        //   })
+          .then((results: any[]) => {
+            loading.dismiss();
+          })
+          .catch(() => {
+            loading.dismiss();
+          })
     }
 }

@@ -2,7 +2,6 @@ import { ImplementationResponseObject } from './../../interfaces/home/Implementa
 import { EchartsDataObject } from './../../containers/echarts.component';
 import { BasicQueryConditionObject } from './../../interfaces/BasicQueryConditionObject';
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
 import { BasicComponent } from '../../basic.component';
 import { HomePageService } from '../../services/home/main-page.service';
 import { BasicInfoObject } from '../../interfaces/BasicInfoObject';
@@ -16,7 +15,6 @@ import { RecentDaysSummaryObject } from '../../interfaces/home/RecentDaysSummary
 export class HomePage extends BasicComponent {
 
   constructor(
-      public navCtrl: NavController,
       private _main: HomePageService,
       public loadingCtrl: LoadingController
     ) {

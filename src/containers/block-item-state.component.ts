@@ -1,13 +1,16 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 @Component({
     selector: 'block-item-state',
+    /**
+     *        
+        // <div class='title-wrapper'>
+        //     <img class='img' [src]='img'>
+        //     <span class='title'>
+        //         {{title}}
+        //     </span>
+        // </div>
+     */
     template: `
-        <div class='title-wrapper'>
-            <img class='img' [src]='img'>
-            <span class='title'>
-                {{title}}
-            </span>
-        </div>
         <div class='value-wrapper'>
             <div class='value-container'>
                 <img class='img' [src]='up ? "assets/imgs/up.png" : "assets/imgs/down.png"'>
@@ -72,10 +75,10 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
             font-size: 18px;
         }
         .value-wrapper .value.up {
-            color: #FF687A;
+            color: #50E3C2;
         }
         .value-wrapper .value.down {
-            color: #50E3C2;
+            color: #FF687A;
         }
         `
     ],

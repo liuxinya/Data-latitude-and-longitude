@@ -6,9 +6,11 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the
-    <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+    <basic-choose (on-change)='basicChooseHandler($event)' class='data-margin'></basic-choose>
+    <title-bar class='data-margin' [title]="'增幅'"></title-bar>
+    <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="increaseData"  [data]='increaseData'></echarts-data>
+    <title-bar class='data-margin' [title]="'占比'"></title-bar>
+    <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="percentageData"  [data]='percentageData'></echarts-data>
+    <title-bar class='data-margin' [title]="'近12月增幅'"></title-bar>
+    <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="recentMonthIncreaseData"  [data]='recentMonthIncreaseData'></echarts-data>
 </ion-content>

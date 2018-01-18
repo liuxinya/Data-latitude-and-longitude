@@ -18,23 +18,25 @@ import { ImplementationResponseObject } from '../../interfaces/home/Implementati
 export interface CategaryObject {
     title: string;
     key: string;
-    ceil: string;
+    ceil?: string;
+    [prop: string]: any;
 }
 let categaries:  CategaryObject[]= [{
-    title: '笔数',
+    title: '笔数(亿)',
     key: 'count',
-    ceil: '笔'
+    ceil: '1亿笔'
 }, {
-    title: '金额',
+    title: '金额(万亿)',
     key: 'amount',
-    ceil: '元'
+    ceil: '1亿元'
 }, {
-    title: '收入',
+    title: '收入(亿)',
     key: 'income',
-    ceil: '元'
+    ceil: '1亿元'
 }];
-function generateY() {
-    return categaries.map((categary: {
+export {categaries};
+export function generateY(_categaries: CategaryObject[] = categaries) {
+    return _categaries.map((categary: {
         title: string,
         key: string,
         ceil: string
@@ -47,13 +49,13 @@ function generateY() {
         }
     })
 }
-function generateChartOptionData(data: BasicChartResponseObject[]) {
+export function generateChartOptionData(data: BasicChartResponseObject[], showIndex: boolean = false) {
     let obj: EchartsDataObject = {
         x: [],
         y: generateY()
     };
     data.map((item: IncreaseAreaResponseObject, index: number ) => {
-        obj.x.push(item.name);
+        obj.x.push(item.name.replace('分公司', '') + (showIndex ?  `\n${index + 1}` : ''));
         obj.y.map((_item: EchartsYDataObject, _index: number) => {
             obj.y[_index].data.push(item.data[_item.key]);
         })
@@ -208,7 +210,7 @@ export class HomePageService {
                 query
             )
             .then((data: StatusObject<IncreaseAreaResponseObject[]>) => {
-                return generateChartOptionData(data.data);
+                return generateChartOptionData(data.data, true);
             })
         } catch(e) {
             return null;

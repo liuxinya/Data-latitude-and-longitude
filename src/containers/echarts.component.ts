@@ -153,7 +153,7 @@ export class EchartsDataComponent {
         return this._data;
     }
     getWidth() {
-        return this.data.x.length > 4 ? 80 * this.data.x.length + 'px' : '100%' 
+        return this.data.x.length > 4 ? 60 * this.data.x.length + 'px' : '100%' 
     }
     // 坐标轴的配置
     getAxis() {
@@ -177,6 +177,7 @@ export class EchartsDataComponent {
                 offset: -40,
                 boundaryGap: false,
                 data: this.data.x,
+                interval: 1,
                 axisLine: {
                     onZero: false,
                     show: false,
@@ -188,7 +189,7 @@ export class EchartsDataComponent {
                     show: false
                 },
                 axisLabel: {
-
+                    interval: 0
                 }
             },
             yAxis: {
@@ -201,7 +202,7 @@ export class EchartsDataComponent {
     }
     // 每个线的配置
     getOption(line: EchartsYDataObject, index: number) {
-        let colors: string[] = ['white', '#F85A87', '#4A90E2'];
+        let colors: string[] = ['white', '#F85A87', '#4A90E2', '#50E3CE', '#ACE24A'];
         let color = colors[index % colors.length];
         return {
             tooltip: {
@@ -227,7 +228,8 @@ export class EchartsDataComponent {
                     }
                 },
                 axisLabel: {
-
+                    interval: 0,
+                    rotate: -30
                 }
             },
             yAxis: {

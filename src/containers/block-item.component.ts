@@ -47,6 +47,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
             justify-content: flex-end;
             align-items: center;
             color: #4A90E2;
+            font-size: 28px;
         }
         `
     ],
