@@ -152,11 +152,11 @@ export class HomePageService {
             )
             .then((data: StatusObject<{
                 increase: {
-                    date: number,
+                    date: string,
                     data: BasicInfoObject
                 }[],
                 nextMonthPrediction: {
-                    date: number,
+                    date: string,
                     data: BasicInfoObject
                 }
             }>) => {
@@ -166,13 +166,16 @@ export class HomePageService {
                     y: generateY()
                 };
                 data.data.increase.map((item: {
-                    date: number,
+                    date: string,
                     data: BasicInfoObject
                 }, index: number) => {
                     if(index === data.data.increase.length - 1) {
-                        obj.x.push(`下月预测`);
+                        obj.x.push(`本月累计`);
                     } else {
-                        let date: Date = new Date(item.date);
+                        let date: Date = new Date(
+                            +item.date.slice(0,4),
+                            +item.date.slice(4,6),
+                            +item.date.slice(6,8));
                         obj.x.push(`${date.getFullYear()}年\n${numCompletion(date.getMonth() + 1)}月`);
                     }
                     obj.y.map((_item: EchartsYDataObject, _index: number) => {
@@ -239,7 +242,7 @@ export class HomePageService {
             return await this._net.get(
                 joinUrl(
                     this.url,
-                    `increase/implementation`
+                    `implementation`
                 ),
                 query
             )

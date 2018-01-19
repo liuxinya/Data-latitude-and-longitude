@@ -30,7 +30,7 @@ import { BasicQueryConditionService } from '../services/BasicQueryCondition.serv
 import { PercentagePipe } from '../pipes/percentage';
 import { RecentDaysDataComponent } from '../modules/recent-days-data';
 import { EchartsDataComponent } from '../containers/echarts.component';
-
+import { MultiPickerModule } from 'ion-multi-picker';
 @NgModule({
   declarations: [
     MyApp,
@@ -54,7 +54,8 @@ import { EchartsDataComponent } from '../containers/echarts.component';
     BrowserModule,
     HttpModule,
     ComponentsModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    MultiPickerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -76,21 +76,21 @@ export class TableDataComponent {
     @Input() headers: TableDataHeaderObject[] = [
         {
             img: 'assets/imgs/bishu.png',
-            title: '笔数',
+            title: '笔数(万)',
             key: 'count',
-            ceil: '笔'
+            ceil: '万笔'
         },
         {
             img: 'assets/imgs/jine.png',
-            title: '金额',
+            title: '金额(亿)',
             key: 'amount',
-            ceil: '元'
+            ceil: '亿元'
         },
         {
             img: 'assets/imgs/shouru.png',
-            title: '收入',
+            title: '收入(万)',
             key: 'income',
-            ceil: '元'
+            ceil: '万元'
         }
     ];
     @Input() contents: TableDataContentObject[] = [];

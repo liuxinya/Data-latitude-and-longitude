@@ -7,6 +7,9 @@ import {CategaryObject} from '../services/home/main-page.service';
         <div class='circle'>
             <div class='instance'>
                 <echarts-basic *ngIf="circleOption" [config]='circleOption'></echarts-basic>
+                <div class="instance-title">
+                    (执行率)
+                </div>
             </div>
         </div>
         <div class='content'>
@@ -21,7 +24,7 @@ import {CategaryObject} from '../services/home/main-page.service';
                 <div class='data-item-wrapper'>
                     <div class='data-item'>
                         <img src='assets/imgs/grow.png'>
-                        <span class='label'>同比增幅</span>
+                        <span class='label'>年同比增幅</span>
                         <span class='value' [ngClass]="[data.lastYearAverageIncrease > 0 ? 'good' : 'bad']">{{data.lastYearAverageIncrease | percentage}}</span>
                     </div>
                 </div>
@@ -70,7 +73,16 @@ import {CategaryObject} from '../services/home/main-page.service';
         .content-wrapper .circle .instance {
             width: 100px;
             height: 100px;
+            position: relative;
             // background-color: red;
+        }
+        .content-wrapper .circle .instance .instance-title {
+            position: absolute;
+            left: 0;
+            bottom: 22%;
+            right: 0;
+            text-align: center;
+            font-size: 10px;
         }
         .content-wrapper .content {
             flex: 1;
@@ -114,7 +126,7 @@ import {CategaryObject} from '../services/home/main-page.service';
         }
         .content-wrapper .content .instance .data-item .label {
             display: inline-block;
-            min-width: 60px;
+            min-width: 70px;
         }
         .content-wrapper .content .instance .data-item .value {
             flex: 1;
@@ -141,7 +153,7 @@ export class CircleItemComponent {
         if (data) {
             this.circleOption = null;
             setTimeout(() => {
-                this.circleOption = generateCircleItemOption(data.yearonyear);
+                this.circleOption = generateCircleItemOption(data.implementationRate);
             }, 0);
         }
         this._data = data;

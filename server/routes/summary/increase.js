@@ -8,9 +8,10 @@ router.use('/', (req, res, next) => {
     let month = 6;
     res.end(helper.package(
         true, {
-            increase: helper.generateArr(params.months, (index) => {
+            increase: helper.generateArr(month, (index) => {
+                let _date = new Date(date.year, date.month - 1 - 6 + index + 1, date.day).getTime();
                 return {
-                    date: new Date(date.year, date.month - 1 - 6 + index + 1, date.day).getTime(),
+                    date: parseDate(_date),
                     data: {
                         count: helper.randomPositiveAndNegative() * Math.random().toFixed(2),
                         amount: helper.randomPositiveAndNegative() * Math.random().toFixed(2),
@@ -19,7 +20,7 @@ router.use('/', (req, res, next) => {
                 }
             }),
             nextMonthPrediction: {
-                date: new Date(date.year, date.month, date.day).getTime(),
+                date: parseDate(new Date(date.year, date.month, date.day).getTime()),
                 data: {
                     count: helper.randomPositiveAndNegative() * Math.random().toFixed(2),
                     amount: helper.randomPositiveAndNegative() * Math.random().toFixed(2),
@@ -61,4 +62,11 @@ router.use('/nextMonthPrediction', (req, res, next) => {
         }
     ))
 });
+function parseZero(num) {
+    return num < 10 ? `0${num}` : num;
+}
+function parseDate(date) {
+    date = new Date(date);
+    return `${parseZero(date.getFullYear())}${parseZero(date.getMonth() + 1)}${parseZero(date.getDate())}`
+}
 module.exports = router;

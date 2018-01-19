@@ -16,12 +16,12 @@ function generateRandomData() {
     let target =  Math.round(Math.random() * 10000000 + 100000);
     return {
         data: Math.round(Math.random() * 10000000 + 100000),
-        lastYearAverageIncrease: helper.randomPositiveAndNegative() * (Math.random().toFixed(2)),
+        lastYearAverageIncrease: (Math.random().toFixed(2)),
         implementation: {
             target: target,
-            hasDone: Math.round(Math.random() * target)
+            hasDone: Math.round(Math.random() *  target + target)
         },
-        implementationRate: helper.randomPositiveAndNegative() * (Math.random().toFixed(2)),
+        implementationRate:((Math.random() * 2).toFixed(2)),
         yearonyear: helper.randomPositiveAndNegative() * (Math.random().toFixed(2)),
     }
 }

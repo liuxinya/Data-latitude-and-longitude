@@ -54,7 +54,8 @@ export class EchartsBasicComponent {
     <div class='container' *ngIf="data">
         <div class='left-part'>
         <div class='title' *ngFor="let line of data.y">
-            {{line.title}}
+            {{line.title.slice(0,2)}}<br/>
+            {{line.title.slice(2)}}
         </div>
         <div class='title'></div>
         </div>
@@ -90,6 +91,7 @@ export class EchartsBasicComponent {
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
             font-size: 12px;
         }
         .left-part .title:last-child {

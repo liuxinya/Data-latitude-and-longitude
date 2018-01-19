@@ -62,6 +62,23 @@ ion-tabs {
         }
     }
 }
+ion-multi-picker {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: 200;
+    position: relative;
+    padding: 4px 8px !important;
+}
+ion-picker-cmp.picker-ios {
+    .picker-wrapper {
+        .picker-toolbar {
+            .picker-toolbar-button.picker-toolbar-multi-picker-cancel {
+                text-align: left;
+            }
+        }
+    }
+}
 .data-margin {
     margin: 8px 0;
 }

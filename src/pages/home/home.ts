@@ -51,7 +51,7 @@ export class HomePage extends BasicComponent {
     let loading = this.loadingCtrl.create({
       content: '数据加载中...'
     });
-    loading.present();
+    await loading.present();
     await Promise.all([
       this._main.getSummaryData()
       .then((data: BasicInfoObject) => {
