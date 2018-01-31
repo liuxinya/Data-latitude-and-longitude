@@ -87,7 +87,7 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
 
         }
         little-item label {
-            font-size: 10px !important;
+
         }
         `
     ]

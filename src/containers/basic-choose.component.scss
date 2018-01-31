@@ -1,12 +1,15 @@
 basic-choose {
+    overflow: hidden;
+    white-space: nowrap;
     ion-checkbox.checkbox .checkbox-icon {
-        width: 12px !important;
-        height: 12px !important;
+        width: 10px !important;
+        height: 10px !important;
+        border-radius: 50%;
     }
     ion-checkbox.checkbox .checkbox-icon .checkbox-inner {
         width: 2px;
         height: 6px;
-        left: 4px;
+        left: 3px;
         top: 1px;
     }
     label {
