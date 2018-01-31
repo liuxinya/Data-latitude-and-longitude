@@ -62,13 +62,20 @@ ion-tabs {
         }
     }
 }
-ion-multi-picker {
+ion-datetime.small .datetime-text {
+    font-size: 10px !important;
+}
+ion-multi-picker.small {
+    font-size: 10px !important;
+}
+ion-multi-picker,ion-datetime {
     display: inline-block;
     vertical-align: middle;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 200;
     position: relative;
-    padding: 4px 8px !important;
+    padding: 4px 8px 4px 25px !important;
+    margin-right: 4px;
 }
 ion-picker-cmp.picker-ios {
     .picker-wrapper {
@@ -105,4 +112,12 @@ ion-picker-cmp.picker-ios {
 }
 .float-right {
     float: right;
+}
+@keyframes trump {
+    from {
+        left: 0;
+    }
+    to {
+        left: 100%;
+    }
 }

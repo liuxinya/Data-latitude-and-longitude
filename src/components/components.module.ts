@@ -2,21 +2,25 @@ import { NgModule } from '@angular/core';
 import { TitleBarComponent } from './title-bar.component';
 import { LittleItemComponent } from './little-item.component';
 import { BrowserModule } from '@angular/platform-browser';
+import { TrumpComponent } from './trump.component';
 
 @NgModule({
   declarations: [
     TitleBarComponent,
-    LittleItemComponent
+    LittleItemComponent,
+    TrumpComponent
   ],
   imports: [
     BrowserModule
   ],
   exports: [
     TitleBarComponent,
-    LittleItemComponent
+    LittleItemComponent,
+    TrumpComponent,
   ],
   entryComponents: [
     TitleBarComponent,
+    TrumpComponent,
     LittleItemComponent
   ]
 })

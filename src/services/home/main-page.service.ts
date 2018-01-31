@@ -8,7 +8,7 @@ import { NetService, StatusObject } from '../net.service';
 import { joinUrl } from '../helpers/net.helper';
 import { BasicQueryConditionService } from '../BasicQueryCondition.service';
 import { ComparisonQueryObject } from '../../interfaces/home/ComparisonQueryObject';
-import { formateDate, numCompletion } from '../helpers/date.helper';
+import { formateDate, numCompletion, getWeekDesc } from '../helpers/date.helper';
 import { generateArr } from '../helpers/array.helper';
 import { RecentDaysSummaryObject } from '../../interfaces/home/RecentDaysSummaryObject';
 import { EchartsDataObject, EchartsYDataObject } from '../../containers/echarts.component';
@@ -105,7 +105,7 @@ export class HomePageService {
                 .then((data: BasicInfoObject) => {
                     return {
                         ...data,
-                        date: `${numCompletion(time.getMonth() + 1)}月${numCompletion(time.getDate())}日`
+                        date: `${numCompletion(time.getMonth() + 1)}.${numCompletion(time.getDate())}(${getWeekDesc(time)})`
                     }
                 })
             })
@@ -160,7 +160,8 @@ export class HomePageService {
                     data: BasicInfoObject
                 }
             }>) => {
-                data.data.increase.push(data.data.nextMonthPrediction);
+                let useNextSum = false;
+                useNextSum && data.data.increase.push(data.data.nextMonthPrediction);
                 let obj: EchartsDataObject = {
                     x: [],
                     y: generateY()
@@ -169,7 +170,7 @@ export class HomePageService {
                     date: string,
                     data: BasicInfoObject
                 }, index: number) => {
-                    if(index === data.data.increase.length - 1) {
+                    if(useNextSum && index === data.data.increase.length - 1) {
                         obj.x.push(`本月累计`);
                     } else {
                         let date: Date = new Date(
@@ -220,7 +221,10 @@ export class HomePageService {
         }
     }
     async getBusinessLineData() {
-        let query = this._basicQuery.parseQuery<BasicQueryConditionObject>();
+        let query = this._basicQuery.parseQuery<BasicQueryConditionObject>({
+            daifu: false,
+            credit: false
+        });
         try {
             return await this._net.get(
                 joinUrl(
@@ -255,6 +259,20 @@ export class HomePageService {
             })
         } catch(e) {
             return null;
+        }
+    }
+    async getNewsInfo() {
+        try {
+            return await this._net.get(
+                joinUrl(
+                    this.url,
+                    'news'
+                )
+            ).then((data: StatusObject<string>) => {
+                return data.data;
+            })
+        } catch(e) {
+            return '';
         }
     }
 }

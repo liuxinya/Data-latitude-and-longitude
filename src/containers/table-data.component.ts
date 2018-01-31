@@ -62,7 +62,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
             margin-right: 6px;
         }
         .line .item:first-child {
-            flex: 2;
+            flex: 3;
         }
         .content .item:
         `

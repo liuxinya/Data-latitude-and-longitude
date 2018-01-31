@@ -20,8 +20,8 @@ export class BasicQueryConditionService {
         return Object.assign({
             date: formateDate(this.$baseConditionData.date$.value),
             area: this.$baseConditionData.area$.value,
-            credit: this.$baseConditionData.credit$.value,
-            daifu: this.$baseConditionData.daifu$.value,
+            credit: !this.$baseConditionData.credit$.value,
+            daifu: !this.$baseConditionData.daifu$.value,
         }, query)
     }
     async getAreaList() {

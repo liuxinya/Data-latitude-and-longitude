@@ -10,15 +10,25 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
 @Component({
     selector: 'basic-choose',
     template: `
-        <little-item [title]="_basicCondition.date$ | async | date: 'yyyy年MM月dd日'"></little-item>
-        <ion-multi-picker class='basic-bg title' [(ngModel)]="area" cancelText="取消" doneText="确定" (ionChange)="confirm($event)" item-content [multiPickerColumns]="areas"></ion-multi-picker>
+        <div class="date-picker-wrapper basic-bg title">
+            <div class="img-wrapper">
+                <img src="assets/imgs/down2.png">
+            </div>
+            <ion-datetime class="small" displayFormat="YYYY年MM月DD日" pickerFormat="YYYY MM DD" cancelText="取消" doneText="确定" [(ngModel)]="myDate"></ion-datetime>
+        </div>
+        <div class='area-picker-wrapper basic-bg title'>
+            <div class="img-wrapper">
+                <img src="assets/imgs/down2.png">
+            </div>
+            <ion-multi-picker class="small" [(ngModel)]="area" cancelText="取消" doneText="确定" (ionChange)="confirm($event)" item-content [multiPickerColumns]="areas"></ion-multi-picker>
+        </div>
         <little-item [use-bg]='false' (click)="clickCredit($event)">
-            <ion-checkbox [ngModel]="!(_basicCondition.credit$ | async)" (ngModelChange)="_basicCondition.credit$.next($event)"></ion-checkbox>
+            <ion-checkbox [ngModel]="!(_basicCondition.credit$ | async)" (ngModelChange)="clickCredit($event)"></ion-checkbox>
             <label>剔除贷记</label>
         </little-item>
         <little-item [use-bg]='false' (click)="clickDaifu($event)">
-            <ion-checkbox [ngModel]="!(_basicCondition.daifu$ | async)" (ngModelChange)="_basicCondition.daifu$.next($event)"></ion-checkbox>
-            <label>剔除代付</label>
+            <ion-checkbox [ngModel]="!(_basicCondition.daifu$ | async)" (ngModelChange)="clickDaifu($event)"></ion-checkbox>
+            <label>仅含信用卡</label>
         </little-item>
     `,
     styles: [
@@ -28,6 +38,56 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
         }
         :host ion-checkbox.checkbox {
             vertical-align: middle;
+        }
+        .date-picker-wrapper {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 0;
+            position: relative;
+        }
+        .date-picker-wrapper .img-wrapper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 24px;
+            display: flex;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .date-picker-wrapper .img-wrapper img {
+
+            max-height: 12px;
+            max-width: 12px;
+        }
+        .area-picker-wrapper {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 0;
+            position: relative;
+        }
+        .area-picker-wrapper .img-wrapper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 24px;
+            display: flex;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .area-picker-wrapper .img-wrapper img {
+
+            max-height: 12px;
+            max-width: 12px;
+        }
+        ion-multi-picker {
+
+        }
+        little-item label {
+            font-size: 10px !important;
         }
         `
     ]
@@ -55,8 +115,16 @@ export class BasicChooseComponent implements OnInit, OnDestroy {
         }
     ];
     area: any;
+    _myDate: any = '2018-01-31';
+    get myDate() {
+        return this._myDate;
+    }
+    set myDate(v: string) {
+        this._myDate = v;
+        this._basicCondition.date$.next(new Date(v));
+        this.changeEmitter.emit(this._basicConditionAction.parseQuery());
+    }
     confirm(e: any) {
-        console.log(e);
         this._basicCondition.area$.next(e['0'].value);
         this.changeEmitter.emit(this._basicConditionAction.parseQuery());
     }

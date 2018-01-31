@@ -48,14 +48,15 @@ export class EchartsBasicComponent {
         instance.setOption(this.config);
     }
 }
+// {{line.title.slice(0,2)}}<br/>
+// {{line.title.slice(2)}}
 @Component({
     selector: 'echarts-data',
     template: `
     <div class='container' *ngIf="data">
         <div class='left-part'>
         <div class='title' *ngFor="let line of data.y">
-            {{line.title.slice(0,2)}}<br/>
-            {{line.title.slice(2)}}
+            {{line.title.slice(0,2)}}
         </div>
         <div class='title'></div>
         </div>

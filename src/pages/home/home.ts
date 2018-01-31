@@ -36,6 +36,7 @@ export class HomePage extends BasicComponent {
   increaseAreaData: EchartsDataObject;
   businessLineData: EchartsDataObject;
   implementationData: ImplementationResponseObject;
+  trump: string;
   /**
    * 选择框的处理事件  在初始化的时候会默认调一次
    */
@@ -56,6 +57,10 @@ export class HomePage extends BasicComponent {
       this._main.getSummaryData()
       .then((data: BasicInfoObject) => {
         this.todayData = data;
+      }),
+      this._main.getNewsInfo()
+      .then((data: string) => {
+        this.trump = data;
       }),
       this._main.getComparisonData()
       .then((data: BasicInfoObject) => {

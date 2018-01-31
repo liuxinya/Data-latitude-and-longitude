@@ -14,7 +14,8 @@ import { Component, Input } from '@angular/core';
             vertical-align: middle;
         }
         .title {
-            font-size: 12px;
+            font-size: 13px;
+            margin-right: 4px;
             font-weight: 200;
         }
         `

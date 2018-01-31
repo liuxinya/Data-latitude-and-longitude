@@ -31,6 +31,7 @@ import { PercentagePipe } from '../pipes/percentage';
 import { RecentDaysDataComponent } from '../modules/recent-days-data';
 import { EchartsDataComponent } from '../containers/echarts.component';
 import { MultiPickerModule } from 'ion-multi-picker';
+import { UpchatService } from '../services/upchat.service';
 @NgModule({
   declarations: [
     MyApp,
@@ -82,6 +83,7 @@ import { MultiPickerModule } from 'ion-multi-picker';
     BasicConditionDataModelSerive,
     CardIssuersService,
     ReceiptService,
+    UpchatService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
