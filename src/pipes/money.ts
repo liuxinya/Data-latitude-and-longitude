@@ -4,15 +4,17 @@ import { Pipe } from '@angular/core';
     name: 'money'
 })
 export class MoneyPipe  implements PipeTransform {
-    transform(num: number, deci: string = ''): string {
+    transform(num: number, deci: string = ''): any {
+        if(isNaN(num)) return num;
         return transformCeil(num, deci);
     }
 }
 export function transformCeil(num: number, deci: string = ''): string {
     let str: string = num + '';
+    let _d0 = deci[deci.length - 3];
     let _d1 = deci[deci.length - 2];
     let _d2 = deci[deci.length - 1];
-    let _long = +deci[deci.length - 3] || 0;
+    let _long = +deci[0] || 0;
     let base = _d2 === '元' ? 100 : 1;
     let count = 1;
     switch(_d1) {
@@ -20,9 +22,9 @@ export function transformCeil(num: number, deci: string = ''): string {
             count = 10000 * base;
             break;
         case '亿':
-            count = 100000000 * base;
+            count = 100000000 * base * (_d0 && _d0 === '万' ? 10000 : 1);
             break;
     }
-    return (num / count).toFixed(_long);
+    return +(num / count).toFixed(_long) + '';
 }
 

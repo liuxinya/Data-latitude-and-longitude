@@ -24,6 +24,16 @@ export class BasicQueryConditionService {
             daifu: !this.$baseConditionData.daifu$.value,
         }, query)
     }
+    async getDateWhichHasDate() {
+       try {
+            return await this._net.get('date')
+            .then((data: StatusObject<string>) => {
+                return data.data;
+            })
+       } catch(e) {
+           return null;
+       }
+    }
     async getAreaList() {
         try {
             return await this._net.get(

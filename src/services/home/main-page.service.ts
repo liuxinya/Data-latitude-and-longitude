@@ -28,7 +28,7 @@ let categaries:  CategaryObject[]= [{
 }, {
     title: '金额(万亿)',
     key: 'amount',
-    ceil: '1亿元'
+    ceil: '1万亿元'
 }, {
     title: '收入(亿)',
     key: 'income',
@@ -86,9 +86,9 @@ export class HomePageService {
             })
         } catch(e) {
             return {
-                count: 0,
-                amount: 0,
-                income: 0
+                count: '暂无',
+                amount: '暂无',
+                income: '暂无'
             }
         }
     }

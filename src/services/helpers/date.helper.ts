@@ -18,8 +18,8 @@ export function numCompletion(num: number | string, len: number = 2, sym: string
         return before ? str + _str_num : _str_num + str;
     }
 }
-export function formateDate(date: Date) {
-    return `${date.getFullYear()}${numCompletion(date.getMonth() + 1)}${numCompletion(date.getDate())}`;
+export function formateDate(date: Date, deci: string = '') {
+    return `${date.getFullYear()}${deci}${numCompletion(date.getMonth() + 1)}${deci}${numCompletion(date.getDate())}`;
 }
 export function getWeekDesc(date: Date) {
     let day = date.getDay();
@@ -38,5 +38,14 @@ export function getWeekDesc(date: Date) {
             return '周五';
         case 6:
             return '周六';
+    }
+}
+export function transformDateStringToHorizon(date: string) {
+    let _date: Date;
+    if(!date) {
+        _date = new Date();
+        return formateDate(_date, '-');
+    } else {
+        return `${date.slice(0,4)}-${date.slice(4, 6)}-${date.slice(6, 8)}`
     }
 }

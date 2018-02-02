@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { BasicQueryConditionObject } from '../interfaces/BasicQueryConditionObject';
 import { BasicQueryConditionService } from '../services/BasicQueryCondition.service';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { transformDateStringToHorizon } from '../services/helpers/date.helper';
 
 @Component({
     selector: 'basic-choose',
@@ -22,12 +23,12 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
             </div>
             <ion-multi-picker class="small" [(ngModel)]="area" cancelText="取消" doneText="确定" (ionChange)="confirm($event)" item-content [multiPickerColumns]="areas"></ion-multi-picker>
         </div>
-        <little-item [use-bg]='false' (click)="clickCredit($event)">
-            <ion-checkbox [ngModel]="!(_basicCondition.credit$ | async)" (ngModelChange)="clickCredit($event)"></ion-checkbox>
+        <little-item [use-bg]='false' (click)="clickDaifu($event)">
+            <ion-checkbox  [ngModel]="!(_basicCondition.daifu$ | async)" (ngModelChange)="clickDaifu($event)"></ion-checkbox>
             <label>剔除贷记</label>
         </little-item>
-        <little-item [use-bg]='false' (click)="clickDaifu($event)">
-            <ion-checkbox [ngModel]="!(_basicCondition.daifu$ | async)" (ngModelChange)="clickDaifu($event)"></ion-checkbox>
+        <little-item [use-bg]='false' (click)="clickCredit($event)">
+            <ion-checkbox [ngModel]="!(_basicCondition.credit$ | async)" (ngModelChange)="clickCredit($event)"></ion-checkbox>
             <label>仅含信用卡</label>
         </little-item>
     `,
@@ -87,7 +88,7 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
 
         }
         little-item label {
-
+            font-size: 10px !important;
         }
         `
     ]
@@ -104,25 +105,19 @@ export class BasicChooseComponent implements OnInit, OnDestroy {
     areas: any[] = [
         {
             options: [
-                // {
-                //     text: '上海',
-                //     value: 'asd'
-                // }, {
-                //     text: '北京',
-                //     value: '拉看什么的'
-                // }
+
             ]
         }
     ];
     area: any;
-    _myDate: any = '2018-01-31';
+    _myDate: any;
     get myDate() {
         return this._myDate;
     }
     set myDate(v: string) {
         this._myDate = v;
         this._basicCondition.date$.next(new Date(v));
-        this.changeEmitter.emit(this._basicConditionAction.parseQuery());
+        this.hasInited && this.changeEmitter.emit(this._basicConditionAction.parseQuery());
     }
     confirm(e: any) {
         this._basicCondition.area$.next(e['0'].value);
@@ -137,22 +132,37 @@ export class BasicChooseComponent implements OnInit, OnDestroy {
         this._basicCondition.daifu$.next(!this._basicCondition.daifu$.value);
         this.changeEmitter.emit(this._basicConditionAction.parseQuery());
     }
+    hasInited: boolean = false;
     async ngOnInit() {
         let loading  = await this.loadingCtrl.create({
-            content: '加载地区中...'
+            content: '加载地区和日期中...'
         });
         await loading.present();
-        let data: AreaObject[] = await this._basicConditionAction.getAreaList();
-        this.areas[0].options = data.map((_area: AreaObject) => {
-            return {
-                text: _area.name,
-                value: _area.code,
-                _data: _area
-            }
-        });
-        this.area = this.areas[0].options[0].value;
-        this._basicCondition.area$.next(this.areas[0].options[0].value);
+        try {
+            await Promise.all([
+                this._basicConditionAction.getAreaList().then((data: AreaObject[]) => {
+                    this.areas[0].options = data.map((_area: AreaObject) => {
+                        return {
+                            text: _area.name,
+                            value: _area.code,
+                            _data: _area
+                        }
+                    });
+                    this.area = this.areas[0].options[0].value;
+                    this._basicCondition.area$.next(this.areas[0].options[0].value);
+                    return data;
+                }),
+                this._basicConditionAction.getDateWhichHasDate().then((date: string) => {
+                    let _date = transformDateStringToHorizon(date);
+                    this.myDate = _date;
+                    return _date;
+                })
+            ])
+        } catch(e) {
+            alert(e);
+        }
         await loading.dismiss();
+        this.hasInited = true;
         this.changeEmitter.emit(this._basicConditionAction.parseQuery());
     }
     ngOnDestroy() {

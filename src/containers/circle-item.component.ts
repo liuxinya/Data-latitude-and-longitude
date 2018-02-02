@@ -19,6 +19,7 @@ import {CategaryObject} from '../services/home/main-page.service';
                         <img src='assets/imgs/money.png'>
                         <span class='label'>{{data.categary.title}}</span>
                         <span class='value'>{{data.data | money: data.categary.ceil}}</span>
+                        <span>{{desc}}</span>
                     </div>
                 </div>
                 <div class='data-item-wrapper'>
@@ -158,6 +159,7 @@ export class CircleItemComponent {
         }
         this._data = data;
     };
+    @Input() desc: string = '';
     get data() {
         return this._data;
     }

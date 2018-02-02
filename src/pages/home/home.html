@@ -1,25 +1,25 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <ion-title>
       首页
     </ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content padding>
   <basic-choose (on-change)='basicChooseHandler($event)' class='data-margin'></basic-choose>
   <title-bar [top-border]='true' class='data-margin' [title]="'当日交易数据'"></title-bar>
   <div class='item-wrapper data-margin'>
-    <block-item class='item basic-bg' [img]="'assets/imgs/bishu.png'" [title]='"笔数(万)"' [value]="todayData.count | money: '万笔'"></block-item>
-    <block-item class='item basic-bg' [img]="'assets/imgs/jine.png'" [title]='"金额(亿)"' [value]="todayData.amount | money: '亿元'"></block-item>
-    <block-item class='item basic-bg' [img]="'assets/imgs/shouru.png'" [title]='"收入(万)"' [value]="todayData.income | money: '万元'"></block-item>
+    <block-item class='item basic-bg' [img]="'assets/imgs/bishu.png'" [title]='"笔数(万)"' [value]="todayData.count | money: '0万笔'"></block-item>
+    <block-item class='item basic-bg' [img]="'assets/imgs/jine.png'" [title]='"金额(亿)"' [value]="todayData.amount | money: '0亿元'"></block-item>
+    <block-item class='item basic-bg' [img]="'assets/imgs/shouru.png'" [title]='"收入(万)"' [value]="todayData.income | money: '0万元'"></block-item>
   </div>
   <!-- <little-item [title]="'当日交易数据与近15天比较'"></little-item> -->
   <title-bar class='data-margin' [title]="'本月累计增幅'"></title-bar>
   <div class='item-wrapper data-margin' style="height: 30px;">
-    <block-item-state class='item basic-bg' [img]="'assets/imgs/bishu.png'" [title]='"笔数"' [up]='comparisonData.count > 0' [value]="comparisonData.count | percentage"></block-item-state>
-    <block-item-state class='item basic-bg' [img]="'assets/imgs/jine.png'" [title]='"金额"' [up]='comparisonData.amount > 0' [value]="comparisonData.amount | percentage"></block-item-state>
-    <block-item-state class='item basic-bg' [img]="'assets/imgs/shouru.png'" [title]='"收入"' [up]='comparisonData.income > 0' [value]="comparisonData.income | percentage"></block-item-state>
+    <block-item-state class='item basic-bg' [img]="'assets/imgs/bishu.png'" [title]='"笔数"' [up]='comparisonData.count > 0' [value]="comparisonData.count | percentage: 1"></block-item-state>
+    <block-item-state class='item basic-bg' [img]="'assets/imgs/jine.png'" [title]='"金额"' [up]='comparisonData.amount > 0' [value]="comparisonData.amount | percentage: 1"></block-item-state>
+    <block-item-state class='item basic-bg' [img]="'assets/imgs/shouru.png'" [title]='"收入"' [up]='comparisonData.income > 0' [value]="comparisonData.income | percentage: 1"></block-item-state>
   </div>
   <!-- <trump [content]='trump'></trump> -->
   <title-bar class='data-margin' [title]="'近七天交易数据'"></title-bar>
@@ -31,7 +31,7 @@
   <title-bar [top-border]='true' class='data-margin' [title]="'各业务条线本月累计增幅'"></title-bar>
   <echarts-data class='data-margin basic-bg-lg' *ngIf="businessLineData && businessLineData.x.length > 0 && businessLineData.y.length > 0" [use-percent]='true'  [data]='businessLineData'></echarts-data>
   <title-bar [top-border]='true' class='data-margin' [title]="'截至当日累计交易数据及执行情况'"></title-bar>
-  <circle-item *ngIf="implementationData && implementationData.count" [data]="implementationData.count" class='data-margin basic-bg-radius basic-bg-color'></circle-item>
-  <circle-item *ngIf="implementationData && implementationData.amount" [data]="implementationData.amount" class='data-margin basic-bg-radius basic-bg-color'></circle-item>
+  <circle-item [desc]="'&nbsp;(剔除贷记)'" *ngIf="implementationData && implementationData.count" [data]="implementationData.count" class='data-margin basic-bg-radius basic-bg-color'></circle-item>
+  <circle-item [desc]="'&nbsp;(剔除贷记)'" *ngIf="implementationData && implementationData.amount" [data]="implementationData.amount" class='data-margin basic-bg-radius basic-bg-color'></circle-item>
   <circle-item *ngIf="implementationData && implementationData.income" [data]="implementationData.income" class='data-margin basic-bg-radius basic-bg-color'></circle-item>
 </ion-content>

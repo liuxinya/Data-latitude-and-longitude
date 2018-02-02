@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { CardIssuersPage } from '../pages/card-issuers/card-issuers';
 import { Tabs } from 'ionic-angular/navigation/nav-interfaces';
 import { UpchatService } from '../services/upchat.service';
+import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 @Component({
   templateUrl: 'app.html'
 })
@@ -19,24 +20,33 @@ export class MyApp {
   safe = false;
   @ViewChild('myTabs') tabRef: Tabs;
   constructor(
-    platform: Platform,
-    statusBar: StatusBar,
-    splashScreen: SplashScreen,
+    private platform: Platform,
+    private statusBar: StatusBar,
+    private splashScreen: SplashScreen,
+    private loadingCtrl: LoadingController,
     private _upchat: UpchatService
   ) {
-    platform.ready().then(() => {
+    this.init()
+  }
+  async init() {
+    await this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
     });
-    _upchat.checkSecurity().then((_result: UpchatStatusObject) => {
+    let loading  = await this.loadingCtrl.create({
+        content: '安全检查中...'
+    });
+    await loading.present();
+    await this._upchat.checkSecurity().then((_result: UpchatStatusObject) => {
       if(_result.state) {
         this.safe = true;
       } else {
-        alert('1' + _result.msg);
+        alert(_result.msg);
       }
-    })
+    });
+    await loading.dismiss();
   }
 }
 
