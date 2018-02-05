@@ -79,7 +79,7 @@ export class UpchatService {
         try {
             let obj: any = {code};
             if(this._flag.mockUpchatEnv && this._flag.mockUpchatEmpNo) {
-                obj.mockempcode = '01363321';
+                obj.mockempcode = '01363317';
             }
             await this._net.get('checkSecurity', obj);
             return {

@@ -13,9 +13,9 @@ router.use('/', (req, res, next) => {
     ))
 });
 function generateRandomData() {
-    let target =  Math.round(Math.random() * 10000000 + 100000);
+    let target =  Math.round(Math.random() * 10000000 + 10000000000);
     return {
-        data: Math.round(Math.random() * 10000000 + 100000),
+        data: Math.round(Math.random() * 10000000 + 100000000000),
         lastYearAverageIncrease: (Math.random().toFixed(2)),
         implementation: {
             target: target,

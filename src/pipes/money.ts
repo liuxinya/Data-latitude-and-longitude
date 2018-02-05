@@ -17,14 +17,23 @@ export function transformCeil(num: number, deci: string = ''): string {
     let _long = +deci[0] || 0;
     let base = _d2 === '元' ? 100 : 1;
     let count = 1;
-    switch(_d1) {
-        case '万':
-            count = 10000 * base;
-            break;
-        case '亿':
-            count = 100000000 * base * (_d0 && _d0 === '万' ? 10000 : 1);
-            break;
+    let _count = 0;
+    function getRes() {
+        if(_count == 3) {
+            return 0;
+        }
+        switch(_d1) {
+            case '万':
+                count = 10000 * base;
+                break;
+            case '亿':
+                count = 100000000 * base * (_d0 && _d0 === '万' ? 10000 : 1);
+                break;
+        }
+        _count++;
+        let res = +(num / count).toFixed(_long);
+        _long++;
+        return res === 0 ? getRes() : res;
     }
-    return +(num / count).toFixed(_long) + '';
+    return getRes();
 }
-

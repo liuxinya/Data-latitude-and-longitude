@@ -156,9 +156,9 @@ export class CircleItemComponent {
     @Input('data')set data(data : CircleImplementationObject) {
         if (data) {
             this.circleOption = null;
-            if(!/全国/gi.test(this.$baseConditionData.areaname$.value)) {
-                data.categary.ceil = data.categary.ceil.replace(/^\d/gi, '2');
-            }
+            // if(!/全国/gi.test(this.$baseConditionData.areaname$.value)) {
+            //     data.categary.ceil = data.categary.ceil.replace(/^\d/gi, '2');
+            // }
             setTimeout(() => {
                 this.circleOption = generateCircleItemOption(data.implementationRate);
             }, 0);

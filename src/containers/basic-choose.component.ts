@@ -18,17 +18,17 @@ import { transformDateStringToHorizon } from '../services/helpers/date.helper';
             <ion-datetime class="small" displayFormat="YYYY年MM月DD日" pickerFormat="YYYY MM DD" cancelText="取消" doneText="确定" [(ngModel)]="myDate"></ion-datetime>
         </div>
         <div style="padding: 4px 0"></div>
-        <div class='area-picker-wrapper basic-bg title'>
+        <div class='margin-right-item area-picker-wrapper basic-bg title'>
             <div class="img-wrapper">
                 <img src="assets/imgs/down2.png">
             </div>
             <ion-multi-picker class="small" [(ngModel)]="area" cancelText="取消" doneText="确定" (ionChange)="confirm($event)" item-content [multiPickerColumns]="areas"></ion-multi-picker>
         </div>
-        <little-item [use-bg]='false' (click)="clickDaifu($event)">
+        <little-item class="margin-right-item" [use-bg]='false' (click)="clickDaifu($event)">
             <ion-checkbox  [ngModel]="!(_basicCondition.daifu$ | async)" (ngModelChange)="clickDaifu($event)"></ion-checkbox>
             <label>剔除贷记</label>
         </little-item>
-        <little-item [use-bg]='false' (click)="clickCredit($event)">
+        <little-item class="margin-right-item" [use-bg]='false' (click)="clickCredit($event)">
             <ion-checkbox [ngModel]="!(_basicCondition.credit$ | async)" (ngModelChange)="clickCredit($event)"></ion-checkbox>
             <label>仅含信用卡</label>
         </little-item>
@@ -37,6 +37,9 @@ import { transformDateStringToHorizon } from '../services/helpers/date.helper';
         `
         :host {
             display: block;
+        }
+        .margin-right-item {
+            margin-right: 20px !important;
         }
         :host ion-checkbox.checkbox {
             vertical-align: middle;
@@ -89,7 +92,7 @@ import { transformDateStringToHorizon } from '../services/helpers/date.helper';
 
         }
         little-item label {
-            font-size: 10px !important;
+            font-size: 12px !important;
         }
         `
     ]
