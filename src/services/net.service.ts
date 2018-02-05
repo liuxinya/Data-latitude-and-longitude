@@ -14,8 +14,8 @@ export class NetService {
         private _flag: FlagService
     ) {
         this.urlPre = this._flag.isDev 
-        ? //'' 
-        'http://172.20.138.132:9995' 
+        ? '' 
+        // 'http://172.20.138.132:9995' 
         : (this._flag.mockNet ? 'http://172.21.21.236:9999/datitude' : '');
     }
     // 前缀  可能是一个自己指定的服务器  也可能是一个前缀
