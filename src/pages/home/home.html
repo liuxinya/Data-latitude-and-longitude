@@ -26,9 +26,9 @@
   <recent-days-data [data]="recentDaysData"></recent-days-data>
   <title-bar [top-border]='true' class='data-margin' [title]="'近六个月增幅'"></title-bar>
   <echarts-data class='data-margin basic-bg-lg' *ngIf="increaseData" [use-percent]='true' [data]='increaseData'></echarts-data>
-  <title-bar [top-border]='true' class='data-margin' [title]="'各地区本月累计增幅'"></title-bar>
+  <title-bar [top-border]='true' class='data-margin' [title]="'各地区本月累计增幅(同比)'"></title-bar>
   <echarts-data class='data-margin basic-bg-lg' *ngIf="increaseAreaData" [use-percent]='true'  [data]='increaseAreaData'></echarts-data>
-  <title-bar [top-border]='true' class='data-margin' [title]="'各业务条线本月累计增幅'"></title-bar>
+  <title-bar [top-border]='true' class='data-margin' [title]="'各业务条线本月累计增幅(同比)'"></title-bar>
   <echarts-data class='data-margin basic-bg-lg' *ngIf="businessLineData && businessLineData.x.length > 0 && businessLineData.y.length > 0" [use-percent]='true'  [data]='businessLineData'></echarts-data>
   <title-bar [top-border]='true' class='data-margin' [title]="'截至当日累计交易数据及执行情况'"></title-bar>
   <circle-item [desc]="'&nbsp;(剔除贷记)'" *ngIf="implementationData && implementationData.count" [data]="implementationData.count" class='data-margin basic-bg-radius basic-bg-color'></circle-item>

@@ -253,7 +253,7 @@ export class HomePageService {
             .then((data: StatusObject<ImplementationResponseObject>) => {
                 // return generateChartOptionData();
                 categaries.map((categary: CategaryObject) => {
-                    data.data[categary.key].categary = categary;
+                    data.data[categary.key].categary = Object.assign({}, categary);
                 })
                 return data.data;
             })

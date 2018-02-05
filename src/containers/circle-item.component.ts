@@ -1,6 +1,7 @@
 import {Component, ElementRef, Input} from '@angular/core';
 import {generateCircleItemOption} from './circle-item.echart.option';
 import {CategaryObject} from '../services/home/main-page.service';
+import { BasicConditionDataModelSerive } from '../model/BasicConditionData';
 @Component({
     selector: 'circle-item', template: `
     <div class='content-wrapper'>
@@ -147,12 +148,17 @@ import {CategaryObject} from '../services/home/main-page.service';
         `]
 })
 export class CircleItemComponent {
-    constructor() {}
+    constructor(
+        private $baseConditionData: BasicConditionDataModelSerive,
+    ) {}
     ngOnInit() {}
     _data : CircleImplementationObject;
     @Input('data')set data(data : CircleImplementationObject) {
         if (data) {
             this.circleOption = null;
+            if(!/全国/gi.test(this.$baseConditionData.areaname$.value)) {
+                data.categary.ceil = data.categary.ceil.replace(/^\d/gi, '2');
+            }
             setTimeout(() => {
                 this.circleOption = generateCircleItemOption(data.implementationRate);
             }, 0);

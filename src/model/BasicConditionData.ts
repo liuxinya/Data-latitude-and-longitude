@@ -9,6 +9,7 @@ export class BasicConditionDataModelSerive {
     date$: BehaviorSubject<Date> = new BehaviorSubject(new Date);
     // 区域选择, 默认是全国
     area$: BehaviorSubject<string> = new BehaviorSubject('');
+    areaname$: BehaviorSubject<string> = new BehaviorSubject('');
     // 是否包含贷记 默认包含
     credit$: BehaviorSubject<boolean> = new BehaviorSubject(true);
     daifu$: BehaviorSubject<boolean> = new BehaviorSubject(true);

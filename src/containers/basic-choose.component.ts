@@ -17,6 +17,7 @@ import { transformDateStringToHorizon } from '../services/helpers/date.helper';
             </div>
             <ion-datetime class="small" displayFormat="YYYY年MM月DD日" pickerFormat="YYYY MM DD" cancelText="取消" doneText="确定" [(ngModel)]="myDate"></ion-datetime>
         </div>
+        <div style="padding: 4px 0"></div>
         <div class='area-picker-wrapper basic-bg title'>
             <div class="img-wrapper">
                 <img src="assets/imgs/down2.png">
@@ -121,6 +122,7 @@ export class BasicChooseComponent implements OnInit, OnDestroy {
     }
     confirm(e: any) {
         this._basicCondition.area$.next(e['0'].value);
+        this._basicCondition.areaname$.next(e['0'].text);
         this.changeEmitter.emit(this._basicConditionAction.parseQuery());
     }
     @Output('on-change') changeEmitter: EventEmitter<boolean> = new EventEmitter();
@@ -150,6 +152,7 @@ export class BasicChooseComponent implements OnInit, OnDestroy {
                     });
                     this.area = this.areas[0].options[0].value;
                     this._basicCondition.area$.next(this.areas[0].options[0].value);
+                    this._basicCondition.areaname$.next(this.areas[0].options[0].text);
                     return data;
                 }),
                 this._basicConditionAction.getDateWhichHasDate().then((date: string) => {
