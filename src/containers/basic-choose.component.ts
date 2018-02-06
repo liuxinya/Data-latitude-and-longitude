@@ -92,7 +92,7 @@ import { transformDateStringToHorizon } from '../services/helpers/date.helper';
 
         }
         little-item label {
-            font-size: 12px !important;
+            font-size: 14px !important;
         }
         `
     ]

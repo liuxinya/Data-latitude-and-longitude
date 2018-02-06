@@ -24,15 +24,15 @@ export interface CategaryObject {
 let categaries:  CategaryObject[]= [{
     title: '笔数(亿)',
     key: 'count',
-    ceil: '1亿笔'
+    ceil: '2亿笔'
 }, {
     title: '金额(万亿)',
     key: 'amount',
-    ceil: '1万亿元'
+    ceil: '2万亿元'
 }, {
     title: '收入(亿)',
     key: 'income',
-    ceil: '1亿元'
+    ceil: '2亿元'
 }];
 export {categaries};
 export function generateY(_categaries: CategaryObject[] = categaries) {

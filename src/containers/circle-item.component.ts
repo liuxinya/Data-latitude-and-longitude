@@ -27,7 +27,7 @@ import { BasicConditionDataModelSerive } from '../model/BasicConditionData';
                     <div class='data-item'>
                         <img src='assets/imgs/grow.png'>
                         <span class='label'>年同比增幅</span>
-                        <span class='value' [ngClass]="[data.lastYearAverageIncrease > 0 ? 'good' : 'bad']">{{data.lastYearAverageIncrease | percentage}}</span>
+                        <span class='value' [ngClass]="[data.lastYearAverageIncrease > 0 ? 'good' : 'bad']">{{data.lastYearAverageIncrease | percentage: 2}}</span>
                     </div>
                 </div>
                 <div class='data-item-wrapper'>
