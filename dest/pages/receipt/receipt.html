@@ -1,0 +1,17 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        收单
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+      <basic-choose (on-change)='basicChooseHandler($event)' class='data-margin'></basic-choose>
+      <title-bar class='data-margin' [title]="'增幅'"></title-bar>
+      <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="increaseData"  [data]='increaseData'></echarts-data>
+      <title-bar class='data-margin' [title]="'占比'"></title-bar>
+      <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="percentageData"  [data]='percentageData'></echarts-data>
+      <title-bar class='data-margin' [title]="'近12月增幅'"></title-bar>
+      <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="recentMonthIncreaseData"  [data]='recentMonthIncreaseData'></echarts-data>
+  </ion-content>
+  

@@ -1,0 +1,18 @@
+basic-choose {
+    overflow: auto;
+    white-space: nowrap;
+    ion-checkbox.checkbox .checkbox-icon {
+        width: 14px !important;
+        height: 14px !important;
+        border-radius: 50%;
+    }
+    ion-checkbox.checkbox .checkbox-icon .checkbox-inner {
+        width: 2px;
+        height: 6px;
+        left: 5px;
+        top: 2px;
+    }
+    label {
+        vertical-align: middle;
+    }
+}

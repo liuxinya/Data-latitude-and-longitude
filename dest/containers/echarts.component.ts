@@ -12,7 +12,6 @@ export interface EchartsYDataObject {
     data: number[];
     key?: string; // 键值
     ceil?: string; // 单位
-    _option: any;
 }
 @Component({
     selector: 'echarts-basic',
@@ -36,19 +35,10 @@ export interface EchartsYDataObject {
 })
 export class EchartsBasicComponent {
     constructor() {}
-    _config: any;
-    @Input('config') set config(config: any) {
-        this._config = config;
-        if(this._config) {
-            this.setOption();
-        }
-    };
-    get config() {
-        return this._config;
-    }
+    @Input('config') config: any;
     @ViewChild('chart') chart: ElementRef;
     ngOnInit() {
-        // this.setOption();
+        this.setOption();
     }
     ngOnChanges() {
         // this.setOption();
@@ -74,10 +64,10 @@ export class EchartsBasicComponent {
             <div class='right-part-container'>
                 <div style='height: 100%;' [ngStyle]="{'width': getWidth()}">
                     <div class='line' *ngFor="let line of data.y; let i = index">
-                        <echarts-basic [config]='line._option'></echarts-basic>
+                        <echarts-basic [config]='getOption(line, i)'></echarts-basic>
                     </div>
                     <div class='line'>
-                        <echarts-basic [config]='axis'></echarts-basic>
+                        <echarts-basic [config]='getAxis()'></echarts-basic>
                     </div>
                 </div>
             </div>
@@ -136,38 +126,30 @@ export class EchartsDataComponent {
     private _data:  EchartsDataObject;
     private min: number;
     private max: number;
-    axis: any;
     // 步长 在min/max的基础上的计算
     @Input('steps') steps: number = 100;
     @Input('data') set data(data: EchartsDataObject) {
-        if(data) {
-            let minmaxData = data.y.map((item: EchartsYDataObject) => {
-                return getMinMax<number>(item.data, (item: number, index: number) => {
-                    return item;
-                });
+        let minmaxData = data.y.map((item: EchartsYDataObject) => {
+            return getMinMax<number>(item.data, (item: number, index: number) => {
+                return item;
             });
-            // 取所有的小的里面的最小的
-            this.min = getMinMax(minmaxData, (item: {
-                min: number,
-                max: number
-            }, index: number) => {
-                return item.min;
-            }).min;
-            // 取所有的大的里面最大的
-            this.max = getMinMax(minmaxData, (item: {
-                min: number,
-                max: number
-            }, index: number) => {
-                return item.max;
-            }).max;
-            this._data = data;
-            this.steps = (this.max - this.min) * 1.2;
-
-            this._data.y.forEach((_item, _index) => {
-                _item._option = this.getOption(_item, _index);
-            })
-            this.axis = this.getAxis();
-        }
+        });
+        // 取所有的小的里面的最小的
+        this.min = getMinMax(minmaxData, (item: {
+            min: number,
+            max: number
+        }, index: number) => {
+            return item.min;
+        }).min;
+        // 取所有的大的里面最大的
+        this.max = getMinMax(minmaxData, (item: {
+            min: number,
+            max: number
+        }, index: number) => {
+            return item.max;
+        }).max;
+        this._data = data;
+        this.steps = (this.max - this.min) * 1.2;
     };
     @Input('use-percent') usePercent: boolean = false;
     get data() {
@@ -178,6 +160,7 @@ export class EchartsDataComponent {
     }
     // 坐标轴的配置
     getAxis() {
+        console.log(this.data.x);
         return {
             tooltip: {
                 trigger: 'none',

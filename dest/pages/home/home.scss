@@ -1,0 +1,12 @@
+page-home {
+    .item-wrapper {
+        display: flex;
+        height: 60px;
+        justify-content: space-between;
+        .item {
+            // flex: 1;
+            width: 32%;
+            // margin-right: 4px;
+        }
+    }
+}
