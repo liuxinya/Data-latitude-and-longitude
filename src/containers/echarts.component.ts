@@ -12,7 +12,7 @@ export interface EchartsYDataObject {
     data: number[];
     key?: string; // 键值
     ceil?: string; // 单位
-    _option: any;
+    _option?: any;
 }
 @Component({
     selector: 'echarts-basic',
