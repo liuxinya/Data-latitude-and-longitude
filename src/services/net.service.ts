@@ -14,7 +14,7 @@ export class NetService {
         private _flag: FlagService
     ) {
         this.urlPre = this._flag.isDev 
-        ?  '' 
+        ?  'http://localhost:9995' 
         // 'http://172.20.182.109:9995' 
         : (this._flag.mockNet ? 'http://172.21.21.236:9999/datitude' : '');
     }
