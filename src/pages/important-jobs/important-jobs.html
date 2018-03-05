@@ -1,0 +1,14 @@
+<!-- <ion-header>
+    <ion-navbar>
+      <ion-title>
+        重点工作
+      </ion-title>
+    </ion-navbar>
+  </ion-header> -->
+  <ion-content padding>
+      <basic-choose (on-change)='basicChooseHandler($event)' class='data-margin'></basic-choose>
+      <title-bar class='data-margin' [title]="'二维码交易趋势'"></title-bar>
+      <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="increaseData"  [data]='increaseData'></echarts-data>
+      <table-border  *ngIf="tbodyData" [tbody-data]="tbodyData"></table-border>
+  </ion-content>
+  

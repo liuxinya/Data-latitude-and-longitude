@@ -1,3 +1,5 @@
+import { ImportantJobs } from '../pages/important-jobs/important-jobs';
+import { Merchant } from './../pages/merchant/merchant';
 import { UpchatStatusObject } from './../services/upchat.service';
 import { ReceiptPage } from './../pages/receipt/receipt';
 import { Component, ViewChild } from '@angular/core';
@@ -17,6 +19,8 @@ export class MyApp {
   rootPage:any = HomePage;
   cardPage: any = CardIssuersPage;
   receipt: any = ReceiptPage;
+  merchant :any = Merchant
+  importantJobs: any = ImportantJobs
   safe = false;
   @ViewChild('myTabs') tabRef: Tabs;
   constructor(

@@ -1,3 +1,6 @@
+import { TableBorderComponent } from './../components/table-border.component';
+import { ImportantJobs } from './../pages/important-jobs/important-jobs';
+import { Merchant } from './../pages/merchant/merchant';
 import { ReceiptService } from './../services/receipt/receipt';
 import { ReceiptPage } from './../pages/receipt/receipt';
 import { CardIssuersService } from './../services/card-issuers/card-issuers.service';
@@ -32,6 +35,7 @@ import { RecentDaysDataComponent } from '../modules/recent-days-data';
 import { EchartsDataComponent } from '../containers/echarts.component';
 import { MultiPickerModule } from 'ion-multi-picker';
 import { UpchatService } from '../services/upchat.service';
+import { ImportantJobsService } from '../services/important-jobs/important-jobs.service';
 @NgModule({
   declarations: [
     MyApp,
@@ -49,7 +53,10 @@ import { UpchatService } from '../services/upchat.service';
     EchartsBasicComponent,
     EchartsDataComponent,
     CircleItemComponent,
-    ReceiptPage
+    ReceiptPage,
+    Merchant,
+    ImportantJobs,
+    TableBorderComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +77,10 @@ import { UpchatService } from '../services/upchat.service';
     BasicChooseComponent,
     EchartsBasicComponent,
     EchartsDataComponent,
-    ReceiptPage
+    ReceiptPage,
+    Merchant,
+    ImportantJobs,
+    TableBorderComponent
   ],
   providers: [
     StatusBar,
@@ -84,6 +94,7 @@ import { UpchatService } from '../services/upchat.service';
     CardIssuersService,
     ReceiptService,
     UpchatService,
+    ImportantJobsService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

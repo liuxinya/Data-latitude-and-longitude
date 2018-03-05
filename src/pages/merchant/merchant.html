@@ -1,0 +1,13 @@
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>
+      商户
+    </ion-title>
+  </ion-navbar>
+</ion-header> -->
+<ion-content padding>
+    <basic-choose (on-change)='basicChooseHandler($event)' class='data-margin'></basic-choose>
+    <title-bar [top-border]='true' class='data-margin' [title]="'民生类交易金额TOP10'"></title-bar>
+    <title-bar class='data-margin' [title]="'增幅'"></title-bar>
+    <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="increaseData"  [data]='increaseData'></echarts-data>
+</ion-content>

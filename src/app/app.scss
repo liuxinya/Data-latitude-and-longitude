@@ -45,6 +45,12 @@ ion-tabs {
         .tabbar {
             &.show-tabbar {
                 background-color: #263653;
+                a.tab-button {
+                    color: #488aff !important;
+                    ion-icon.tab-button-icon {
+                        color: #488aff !important;
+                    }
+                }
                 a.tab-button[aria-selected=true] {
                     color: white !important;
                     ion-icon.tab-button-icon {
