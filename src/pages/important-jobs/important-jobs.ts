@@ -18,6 +18,8 @@ export class ImportantJobs extends BasicComponent{
     }
     increaseData: EchartsDataObject;
     tbodyData: TbodyDataItem[];
+    circleConsumeData: CircleDataObject[];
+    circlePayData: CircleDataObject[];
     basicChooseHandler(basicQuery: BasicQueryConditionObject) {
         // 获取数据
         this.initData();
@@ -36,8 +38,16 @@ export class ImportantJobs extends BasicComponent{
             this._main.getTableData()
                 .then((data: TbodyDataItem[]) => {
                     this.tbodyData = data;
-                    console.log(this.tbodyData)
                 }),
+            this._main.getCircleConsume()
+                .then((data: CircleDataObject[]) => {
+                    this.circleConsumeData = data;
+                    console.log(this.circleConsumeData)
+                }),
+            this._main.getCirclePay()
+                .then((data: CircleDataObject[]) => {
+                    this.circlePayData = data;
+                })
         ])
         .then((results: any[]) => {
             loading.dismiss();
@@ -51,4 +61,8 @@ export interface TbodyDataItem {
     thisMonth: number;
     thisDay: number;
     summary: number;
+}
+export interface CircleDataObject {
+    value: number;
+    name: string;
 }

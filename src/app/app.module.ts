@@ -1,3 +1,4 @@
+import { CircleChart } from './../components/circle-chart.component';
 import { TableBorderComponent } from './../components/table-border.component';
 import { ImportantJobs } from './../pages/important-jobs/important-jobs';
 import { Merchant } from './../pages/merchant/merchant';
@@ -56,7 +57,8 @@ import { ImportantJobsService } from '../services/important-jobs/important-jobs.
     ReceiptPage,
     Merchant,
     ImportantJobs,
-    TableBorderComponent
+    TableBorderComponent,
+    CircleChart
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import { ImportantJobsService } from '../services/important-jobs/important-jobs.
     ReceiptPage,
     Merchant,
     ImportantJobs,
-    TableBorderComponent
+    TableBorderComponent,
+    CircleChart
   ],
   providers: [
     StatusBar,

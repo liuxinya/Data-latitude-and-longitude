@@ -28,12 +28,10 @@ import { Component, Input, OnInit } from '@angular/core';
             margin-top: 20px;
         }
         .table {
-            position: relative;
+            text-align: center;
         }
         .table table {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+           display: inline-block;
         }
         thead tr th,
         tbody tr td {
@@ -84,23 +82,7 @@ export class TableBorderComponent implements OnInit{
             title: '累计'
         },
     ];
-    @Input('tbody-data') tbodyData: TbodyDataItem[] = [
-        {
-            thisMonth: 1,
-            thisDay: 1,
-            summary: 1,
-        },
-        {
-            thisMonth: 2,
-            thisDay: 2,
-            summary: 2,
-        },
-        {
-            thisMonth: 3,
-            thisDay: 3,
-            summary: 3,
-        }
-    ]
+    @Input('tbody-data') tbodyData: TbodyDataItem[] = [];
 
 }
 export interface TableTitleData {

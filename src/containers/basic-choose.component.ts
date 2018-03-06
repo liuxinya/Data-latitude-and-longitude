@@ -1,7 +1,6 @@
 
 import { BasicConditionDataModelSerive } from './../model/BasicConditionData';
-import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, Output, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { BasicQueryConditionObject } from '../interfaces/BasicQueryConditionObject';
 import { BasicQueryConditionService } from '../services/BasicQueryCondition.service';

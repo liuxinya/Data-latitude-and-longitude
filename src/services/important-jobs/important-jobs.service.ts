@@ -52,6 +52,20 @@ export class ImportantJobsService extends BasicPageService{
                 return arr;
             })
     }
+    async getCircleConsume(opts?:any) {
+        let query = this._basicQuery.parseQuery<ComparisonQueryObject>(opts);
+        return await this._net.get(joinUrl(this.basicUrl,'nfc/scenes'),query)
+            .then( (data: any) => {
+                return data.data;
+            })
+    }
+    async getCirclePay(opts?:any) {
+        let query = this._basicQuery.parseQuery<ComparisonQueryObject>(opts);
+        return await this._net.get(joinUrl(this.basicUrl,'nfc/pay'),query)
+            .then( (data: any) => {
+                return data.data;
+            })
+    }
 }
 // export interface TableDataObj {
 //     amount: TableDataItemObj;

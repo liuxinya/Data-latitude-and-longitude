@@ -10,5 +10,9 @@
       <title-bar class='data-margin' [title]="'二维码交易趋势'"></title-bar>
       <echarts-data [use-percent]='true' class='data-margin basic-bg-lg' *ngIf="increaseData"  [data]='increaseData'></echarts-data>
       <table-border  *ngIf="tbodyData" [tbody-data]="tbodyData"></table-border>
+      <title-bar class='data-margin' [title]="'NFC消费场景占比'"></title-bar>
+      <circle-chart *ngIf="circleConsumeData" [circle-data]='circleConsumeData'></circle-chart>
+      <title-bar class='data-margin' [title]="'NFC PAY 占比图'"></title-bar>
+      <circle-chart *ngIf="circlePayData  " [circle-data]='circlePayData'></circle-chart>
   </ion-content>
   
